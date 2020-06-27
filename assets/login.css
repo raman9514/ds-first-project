@@ -1,0 +1,62 @@
+
+.loginform{
+    width: 400px;
+    height: 500px;
+    margin-top: 50px;
+    margin-left:  40%; 
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-bottom: 60px;
+    
+    border: 3px;
+    border-color:palegreen;
+    border-style: solid;
+    border-radius: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    box-shadow: 2px 5px 5px 2px whitesmoke;
+}
+
+.input_field{
+        margin-bottom: 20px;
+        height: 35px; width: 300px;
+        border-radius: 15px;
+        border: solid greenyellow 0.5px;
+        
+        text-align: center;
+    
+    }
+
+.buttons{
+
+    background-color : greenyellow;
+    border: 0.5px greenyellow solid;
+    margin-bottom: 15px;
+    height: 30px; width: 150px;
+    align-items: center;
+    margin-left: 75px;
+    border-radius: 20px;
+}
+
+#note{
+    font-size: 30px;
+    text-align: center;
+    margin-right: 30px;
+    margin-bottom: 40px;
+
+}
+
+#login_buttion{
+
+    margin-top: 30px;
+}
+label{
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.loginform a {
+    color: black;
+    float :  right;
+}
