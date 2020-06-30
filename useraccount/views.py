@@ -26,17 +26,26 @@ def signup(request):
 def login(request):
     if request.method=='POST':
         fm=LoginForm(request.POST)
-        user = fm.authenticate(request)
-
+        
+        
+        username=request.POST['username']
+        password=request.POST['password']
+        user = authenticate(request,username=username , password = password)
+        print(user)
         if user is not None:
-            #auth.login(request , user)
+            print("login success");
+            auth.login(request , user)
             return redirect('index')
         else:
-            pass
-            # messages.error(request,'Invalid Details')
+            print("login faild")
+            messages.error(request,'Invalid Details')
         
 
-    fm=LoginForm
+    if request.method == 'GET':
+        fm=LoginForm
     return render(request,'login.html',{'login_form':fm})  
 
 
+def logout(request):
+    auth.logout(request)
+    return redirect('index')
