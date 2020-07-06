@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
+
 
 class SignUpForm(UserCreationForm):
     password2 = forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -20,13 +21,9 @@ class SignUpForm(UserCreationForm):
 
 
 
-
-
-
-
-
 class LoginForm(AuthenticationForm):
 
     username = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder': 'password',}))
         
+
