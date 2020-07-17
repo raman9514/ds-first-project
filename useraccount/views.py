@@ -23,7 +23,7 @@ def signup(request):
             fm=SignUpForm()
         return render(request,'register.html',{"reg_form":fm})    
     else:
-        return HttpResponse("Your Are Already logedin You cant access this page")
+        return HttpResponse("please Logout First  ")
 
 
 
@@ -62,11 +62,9 @@ def profile(request):
     if request.user.is_authenticated:
         current_user=request.user
         allorders = Order.objects.filter(user_id=current_user)
-        
-        
         return render(request, 'profile.html',{'allorders':allorders})
-
-        pass
+        
+        
 
     else:
         return render(request, 'guestprofile.html')
