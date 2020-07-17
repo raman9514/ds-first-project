@@ -1,0 +1,43 @@
+{% extends "basic.html" %} 
+{block title}User_Profile{endblock title}
+
+{% block content %}
+  
+
+<div style="width: 100%;"> 
+    <div  style="  float: left;" class="ml-3">
+      <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+      class="rounded-circle" alt="Cinque Terre" style="width:300px;"> 
+      </div>
+     <div float="right" style=" float: left; " class="mt-3">
+        <b style="font-family:Verdana; color:#778899; font-size:80px ;"> {{user.username}} </b>
+        <p style="font-family:cursive; color:blueviolet" class="ml-5"> {{user.email}} </p>
+        <p style="font-family:cursive; color:blueviolet" class="ml-3"> +91 9999222062</p>
+     </div>
+  </div>
+
+
+  <span>
+     <hr>
+   {% for myorder in allorders %}
+
+   {{myorder.product_list}}
+     <hr>
+   {% endfor %}
+</span> 
+
+
+
+{% endblock content %}
+
+{% block css %}
+      
+
+{% endblock css %}
+
+
+{% block js %}
+  
+
+{% endblock js %}
+    

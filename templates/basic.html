@@ -12,6 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@600&family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
   </style> 
   <style> #logo{
     font-family:'Pacifico', cursive;
@@ -41,6 +42,10 @@
    
      
     {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'TakeOrder'%}">new order</a>
+    </li>
+
       
      {% else %} 
   
@@ -59,7 +64,7 @@
     <ul class="navbar-nav  ">
      
       <li class="nav-right mr-4">
-        <a  class="nav-link " href="#">{{user.first_name|default:'Guest'}}</a>
+        <a  class="nav-link " href="{% url 'profile' %}">{{user.first_name|default:'Guest'}}</a>
       </li>
       
       {% if user.is_authenticated %}
@@ -73,7 +78,7 @@
    <br>   
 </div>
 
- 
+
 
 {% block content %}  
 
@@ -82,6 +87,19 @@
  
  {% endblock %}
  
+
+ 
+ 
+ 
+ <footer class="page-footer font-small blue fixed-bottom">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="#">Raman9514@gmail.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

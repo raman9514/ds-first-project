@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login
 from django.contrib.auth.models import auth
 from django.shortcuts import HttpResponse
+from order.models import Order
 # Create your views here.
 
 
@@ -54,3 +55,18 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('index')
+
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        current_user=request.user
+        allorders = Order.objects.filter(user_id=current_user)
+        
+        
+        return render(request, 'profile.html',{'allorders':allorders})
+
+        pass
+
+    else:
+        return render(request, 'guestprofile.html')
