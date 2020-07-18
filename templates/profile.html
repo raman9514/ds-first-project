@@ -3,7 +3,7 @@
 
 {% block content %}
   
-
+<div class="container">
 <div style="position: absolute"> 
     <div  style="  float: left; position: relative;" class="ml-3">
       <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
@@ -15,16 +15,6 @@
         <p style="font-family:cursive; color:blueviolet" class="ml-3"> +91 9999222062</p>
      </div>
   </div>
-
-  <br><br><br><br><br><br><br><br><br><br><br><br>
- <div style="position:relative;" class="pl-5">
-   <hr>
-  
-   {% for myorder in allorders %}
-
-   <td>{{myorder.product_list}}</td>
- <hr>
- {% endfor %}
 </div>
 
    

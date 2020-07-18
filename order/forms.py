@@ -15,7 +15,8 @@ class OrderForm(forms.ModelForm):
         'u_phone_no':'contact no. ',
         'u_delivery_address':'Address ',
         'u_pincode':'Zip Code ',
-        'u_delivery_note':'Add Delivery Note ' }
+        'u_delivery_note':'Add Delivery Note ',
+        'user_id':'' }
 
         widgets={
         'product_list':forms.TextInput(attrs={"class":"form-control"}),

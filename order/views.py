@@ -27,3 +27,14 @@ def TakeOrder(request):
         # return HttpResponse('Invalid request')
         return redirect('login')
             
+
+
+def myorder(request):
+    if request.user.is_authenticated:
+        current_user=request.user
+        allorders = Order.objects.filter(user_id=current_user)
+        return render(request, 'myorders.html',{'allorders':allorders})
+
+    else:
+        redirect('login')
+        
