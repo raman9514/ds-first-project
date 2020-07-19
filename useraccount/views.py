@@ -60,9 +60,9 @@ def logout(request):
 
 def profile(request):
     if request.user.is_authenticated:
-        current_user=request.user
-        allorders = Order.objects.filter(user_id=current_user)
-        return render(request, 'profile.html',{'allorders':allorders})
+        # current_user=request.user
+        # allorders = Order.objects.filter(user_id=current_user)
+        return render(request, 'profile.html')
         
         
 
