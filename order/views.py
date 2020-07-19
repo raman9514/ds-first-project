@@ -32,9 +32,21 @@ def TakeOrder(request):
 def myorder(request):
     if request.user.is_authenticated:
         current_user=request.user
-        allorders = Order.objects.filter(user_id=current_user)
+        allorders = Order.objects.filter(user_id=current_user).order_by('order_date').reverse()
         return render(request, 'myorders.html',{'allorders':allorders})
 
     else:
         redirect('login')
         
+
+def cancleorder(request,id):
+    if request.user.is_authenticated:
+        if request.method =='POST':
+            obj=Order.objects.filter(id=id)
+            print(id);
+            obj.update(order_cancelled=True,order_pending=False,order_picked=False,order_delivered=False)
+            
+            return redirect('myorder')
+    else:
+        return redirect('login')        
+            

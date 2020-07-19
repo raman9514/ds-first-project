@@ -14,8 +14,18 @@
    {% for order in allorders %}
      
    
-      <tr>
-       <td > {{ order.order_date }} </td>
+     
+         {% if order.order_pending %}
+         <tr class="table-primary" >
+      {% elif order.order_picked%}
+      <tr class="table-alert" >
+      {% elif order.order_delivered %}
+      <tr class="table-success" >
+      {% elif order.order_cancelled %}
+      <tr class="table-danger" >
+      {% endif %}
+       
+                  <td > {{ order.order_date }} </td>
        <td > {{order.product_list | truncatechars:30}} </td>
        
        <td> 
@@ -28,12 +38,17 @@
       {% elif order.order_delivered %}
             deliverd
       {% elif order.order_cancelled %}
-         cancled
-
+         canceled
       {% endif %}
         
               </td>
-              <td> <a href="#" class="btn btn-danger btn-sm float-right"> cancel order </a> </td>
+              <td>
+            <form action="{% url 'cancleorder' order.id %}" method="post">
+               {% csrf_token %} 
+               <input type="submit" class="btn btn-danger float-right btn-sm" value="cancel">
+            </form>
+                  
+                  </td>
     </tr>
   </tbody>
 {% endfor %}
