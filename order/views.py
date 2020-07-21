@@ -50,3 +50,18 @@ def cancleorder(request,id):
     else:
         return redirect('login')        
             
+
+def editorder(request,id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            obj=Order.objects.get(pk=id)
+            fm=OrderForm(request.POST,instance=obj)
+            if fm.is_valid():
+                fm.save()
+
+        else:
+            obj=Order.objects.get(pk=id)
+            fm=OrderForm(instance=obj)
+
+        return render(request,'editorder.html',{"form":fm})    
+                

@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('useraccount/',include('useraccount.urls')),
     path('order/', include('order.urls')),
+    path('delivery_staff/',include('delivery_staff.urls')),
     
 ]

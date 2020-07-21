@@ -30,6 +30,7 @@ def signup(request):
 def login(request):
     
     if not request.user.is_authenticated:
+
         if request.method=='POST':
             fm=LoginForm(request.POST)
 
@@ -40,7 +41,11 @@ def login(request):
             if user is not None:
                 print("login success");
                 auth.login(request , user)
-                return redirect('index')
+                if user.is_staff == True:
+                    return redirect('deliverystaff_index')
+
+                else:
+                    return redirect('index')
             else:
                 print("login faild")
                 messages.error(request,'Invalid Details')
