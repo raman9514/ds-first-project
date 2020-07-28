@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
-   path('deliverystaff_index',views.deliverystaff,name='deliverystaff_index'),
+   path('index',views.deliverystaff,name='deliverystaff_index'),
+   path('view_request/<int:order_id>',views.view_request,name='view_request'),
 ]
