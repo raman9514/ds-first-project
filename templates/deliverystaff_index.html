@@ -14,25 +14,27 @@
 
 
 
-
-
-
-
-
 <div  class='navbar nav navbar-default navbar-static-top'> 
     <a href="#" >Avilabel Order</a>
     <a href="#" >MY Accepted</a>
      <hr>
 </div>
 
+{% if messages %}
+{% for message in messages %}
+ <div class="alert alert-success alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{message}}</strong> 
+ </div> {% endfor %}  {% endif %}
+
 
 <table class="table table-hover">
    <thead>    <tr>
        <th>Date</th>
        <th>product</th>
-       <th>Contact</th>
-       <th>User Pincode</th>
-       <th>Shop pincode</th>
+      
+       <th>Pickup Address</th>
+       <th>Deliverd To</th>
        <th class="text-right">view</th>
        <th>accept</th>
         </tr>
@@ -43,11 +45,18 @@
     <tr>
        <td> {{order.order_date}}</td>
        <td> {{order.product_list}}</td>
-       <td> {{order.u_phone_no}}</td>
-       <td> {{order.u_pincode}}</td>
-       <td> {{order.shop_pincode}}</td>
-       <td> <a href="{% url 'view_request' order.id %}" class="btn btn-primary float-right" > view </a></td>
-       <td> <a href="#" class="btn btn-success" > Accept</a></td>
+       <td> {{order.shop_address}},{{order.shop_pincode}}</td>
+       <td> {{order.u_delivery_address}},{{order.u_pincode}}</td>
+       <td> 
+           <form action="{% url 'view_request' order.id %}" >
+            {% csrf_token %}<input type="submit" value="view"  class="btn btn-primary float-right" > 
+           </form>
+        </td>
+       <td> 
+        <form action="{% url 'accept_order' order.id %}" >
+            {% csrf_token %}<input type="submit" value="Accept"  class="btn btn-success float-right" > 
+           </form>
+       </td>
     </tr>
     {% endfor %}
     </tbody>
