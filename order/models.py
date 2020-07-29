@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import timezone
+
 # Create your models here.
 
 class Order(models.Model):
@@ -22,6 +23,8 @@ class Order(models.Model):
     order_delivered = models.BooleanField(default=False)
     order_cancelled = models.BooleanField(default=False)
 
+    delivery_staff = models.CharField(max_length=20 , default="null" )
+    
 
 
 

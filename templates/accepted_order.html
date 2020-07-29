@@ -30,33 +30,52 @@
 
 <table class="table table-hover">
    <thead>    <tr>
+       <th>Status</th>
        <th>Date</th>
        <th>product</th>
-      
+       <th >Name</th>
+       <th>Contact</th>
        <th>Pickup Address</th>
        <th>Deliverd To</th>
-       <th class="text-right">view</th>
-       <th>accept</th>
-        </tr>
+       <th>Note</th>
+
+    </tr>
    </thead>
    <tbody>
     {% for order in obj %}
       
-    <tr>
+    {% if order.order_pending %}
+    <tr class="table-primary" >
+ {% elif order.order_picked%}
+ <tr class="table-primary" >
+ {% elif order.order_delivered %}
+ <tr class="table-success" >
+ {% elif order.order_cancelled %}
+ <tr class="table-danger" >
+    
+ {% endif %}
+
+        
+       <td> 
+        {% if order.order_pending %}
+        pending
+     {% elif order.order_picked%}
+           picked
+     {% elif order.order_delivered %}
+           deliverd
+     {% elif order.order_cancelled %}
+        canceled
+     {% endif %}
+       </td>
        <td> {{order.order_date}}</td>
        <td> {{order.product_list}}</td>
+       <td>{{order.U_name}}</td>
+       <td>{{order.u_phone_no}}</td>
        <td> {{order.shop_address}},{{order.shop_pincode}}</td>
        <td> {{order.u_delivery_address}},{{order.u_pincode}}</td>
-       <td> 
-           <form action="{% url 'view_request' order.id %}" >
-            {% csrf_token %}<input type="submit" value="view"  class="btn btn-primary float-right" > 
-           </form>
-        </td>
-       <td> 
-        <form action="{% url 'accept_order' order.id %}" >
-            {% csrf_token %}<input type="submit" value="Accept"  class="btn btn-success float-right" > 
-           </form>
-       </td>
+       <td>{{order.u_delivery_note}}</td>
+       
+       
     </tr>
     {% endfor %}
     </tbody>
