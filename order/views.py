@@ -64,4 +64,15 @@ def editorder(request,id):
             fm=OrderForm(instance=obj)
 
         return render(request,'editorder.html',{"form":fm})    
-                
+
+
+def order_received(request,id):
+    if request.user.is_authenticated:
+        if request.method =='POST':
+            obj=Order.objects.filter(id=id)
+            print(id);
+            obj.update(order_cancelled=False,order_pending=False,order_picked=False,order_delivered=True)
+            
+            return redirect('myorder')
+    else:
+        return redirect('login') 

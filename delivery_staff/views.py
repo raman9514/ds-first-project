@@ -14,16 +14,6 @@ def deliverystaff(request):
         return redirect('index')    
 
 
-
-def view_request(request,order_id):
-    if request.user.is_authenticated and request.user.is_staff==True:
-        
-        obj = Order.objects.get(id = order_id)
-        fm=OrderForm(instance=obj)
-        return render(request,'view_request.html',{'form':fm})
-
-    else:
-        return redirect('index')   
     
 
 
@@ -33,7 +23,7 @@ def accept_order(request,order_id):
         obj = Order.objects.filter(id = order_id)
         obj.update(order_cancelled=False,order_pending=False,order_picked=True,order_delivered=False,delivery_staff=user) 
         messages.success(request, 'Order Accepted')
-        return redirect('deliverystaff_index')
+        return redirect('accepted_order')
 
     else:
         return redirect('index')   

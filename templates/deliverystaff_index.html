@@ -35,8 +35,8 @@
       
        <th>Pickup Address</th>
        <th>Deliverd To</th>
-       <th class="text-right">view</th>
-       <th>accept</th>
+       <th class="text-center">action</th>
+       
         </tr>
    </thead>
    <tbody>
@@ -44,23 +44,73 @@
       
     <tr>
        <td> {{order.order_date}}</td>
-       <td> {{order.product_list}}</td>
-       <td> {{order.shop_address}},{{order.shop_pincode}}</td>
-       <td> {{order.u_delivery_address}},{{order.u_pincode}}</td>
+       <td> {{order.product_list|truncatechars:15}}</td>
+       <td> {{order.shop_address|truncatechars:20}},{{order.shop_pincode}}</td>
+       <td> {{order.u_delivery_address|truncatechars:15}},{{order.u_pincode}}</td>
        <td> 
-           <form action="{% url 'view_request' order.id %}" >
-            {% csrf_token %}<input type="submit" value="view"  class="btn btn-primary float-right" > 
-           </form>
-        </td>
-       <td> 
-        <form action="{% url 'accept_order' order.id %}" >
-            {% csrf_token %}<input type="submit" value="Accept"  class="btn btn-success float-right" > 
-           </form>
+           
+          
+           <form action="{% url 'accept_order' order.id %}" >
+            {% csrf_token %}<input type="submit" value="Accept"  class="btn btn-success float-right ml-2" > 
+            </form>
+
+           <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal{{order.id}}">
+            view
+          </button>
+          
        </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+
+  <!-- models implementation start -->
+
+  {% for order in obj %}
+  <div class="container"> 
+  <div class="modal fade model-sm" id="myModal{{order.id}}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+         <b>User Name : </b> {{order.u_name}}<br>
+         <b>Contact : </b> {{order.u_phone_no}}<br>
+         <b>Product : </b> {{order.product_list}}<br>
+         <b>Pickup Address : </b> {{order.shop_address}} {{order.shop_pincode}}<br>
+         <b>Delivery Address : </b> {{order.u_delivery_address}} {{order.u_pincode}}<br>
+         <b>Delivery Note : </b> {{order.u_delivery_note}}<br>
+         
+        </div>
+        
+        <!-- Modal footer -->
+            <div class="modal-footer">
+                <div class="container float-left">
+                    <form action="{% url 'accept_order' order.id %}" >
+                {% csrf_token %}<input type="submit" value="Accept Order"  class="btn btn-success btn-block ml-2" > 
+                </form>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+  {% endfor %}
+
+  
+
+
 
 
 </body>

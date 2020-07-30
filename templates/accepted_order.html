@@ -38,35 +38,33 @@
        <th>Pickup Address</th>
        <th>Deliverd To</th>
        <th>Note</th>
-
-    </tr>
-   </thead>
+         </tr>
+      </thead>
    <tbody>
-    {% for order in obj %}
-      
+ {% for order in obj %}
+   
     {% if order.order_pending %}
     <tr class="table-primary" >
- {% elif order.order_picked%}
- <tr class="table-primary" >
- {% elif order.order_delivered %}
- <tr class="table-success" >
- {% elif order.order_cancelled %}
- <tr class="table-danger" >
-    
- {% endif %}
+    {% elif order.order_picked%}
+    <tr class="table-primary" >
+    {% elif order.order_delivered %}
+    <tr class="table-success" >
+    {% elif order.order_cancelled %}
+    <tr class="table-danger" > 
+    {% endif %}
 
         
-       <td> 
+      <td> 
         {% if order.order_pending %}
         pending
-     {% elif order.order_picked%}
-           picked
-     {% elif order.order_delivered %}
-           deliverd
-     {% elif order.order_cancelled %}
-        canceled
-     {% endif %}
-       </td>
+        {% elif order.order_picked%}
+              picked
+        {% elif order.order_delivered %}
+              deliverd
+        {% elif order.order_cancelled %}
+           canceled
+        {% endif %}  </td>
+        
        <td> {{order.order_date}}</td>
        <td> {{order.product_list}}</td>
        <td>{{order.U_name}}</td>
@@ -74,12 +72,13 @@
        <td> {{order.shop_address}},{{order.shop_pincode}}</td>
        <td> {{order.u_delivery_address}},{{order.u_pincode}}</td>
        <td>{{order.u_delivery_note}}</td>
-       
-       
-    </tr>
+         
+    </tr>  
+
     {% endfor %}
     </tbody>
 </table>
+
 
 
 </body>

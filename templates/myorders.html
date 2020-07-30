@@ -44,11 +44,19 @@
       <td>
          {% if order.order_cancelled %}
 
+         
+         
+         {% elif order.order_delivered %}
+         {% elif order.order_picked %}
+         <form action="{% url 'cancleorder' order.id %}" method="post">
+            {% csrf_token %}<input type="submit" class="btn btn-danger float-right " value="cancel">
+         </form>
+         <form action="{% url 'order_received' order.id %}" method="post">
+            {% csrf_token %}<input type="submit" class="btn btn-info float-right mr-1" value="received">
+         </form>
          {% else %}
             <form action="{% url 'cancleorder' order.id %}" method="post">
-               {% csrf_token %} 
-               
-               <input type="submit" class="btn btn-danger float-right " value="cancel">
+               {% csrf_token %}<input type="submit" class="btn btn-danger float-right " value="cancel">
             </form>
                 <a href="{% url 'editorder' order.id %}" class="btn btn-info float-right btn-sm d-inline mr-2 mt-1" >Edit</a>  
          {% endif %}
