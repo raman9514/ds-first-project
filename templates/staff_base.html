@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@600&family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+  </style> 
+  <style> #logo{
+    font-family:'Pacifico', cursive;
+    font-size: 35px;
+    color: white;
+  }
+#mynav-link:hover{
+font-weight: bold;
+color: white;
+
+}
+  
+ </style>
+
+ <title> {% block title %}  {% endblock %} </title>
+  <style> {% block css %} {% endblock %} </style>
+  <script> 
+  {% block js%} {% endblock js%} </script>
+</head>
+<body>
+ 
+  
+  <!-- N A B B A R -->
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" id='logo' href="{% url 'index'%}">DS</a>
+    <ul class="navbar-nav  ">
+            {% if user.is_authenticated %}
+          
+            <li class="nav-item">
+              <a id="mynav-link" class="nav-link " href="{% url 'deliverystaff_index'%}">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>available</a>
+          </li>
+       
+        <li class="nav-item">
+            <a id="mynav-link" class="nav-link" href="{% url 'accepted_order'%}">
+              <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box-seam" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+              </svg>Accepted </a>
+        </li>
+  
+       
+            {% endif %}
+    </ul>
+        
+    <div class="collapse navbar-collapse justify-content-end">  
+        <ul class="navbar-nav  ">
+            <li class="nav-right mr-4">                   
+                <a id="mynav-link" class="btn btn-link nav-link" data-toggle="modal" data-target="#myModal">
+                  {{user.username|default:'GUEST'|truncatechars:20}}
+                </a>             
+              </li>
+        </ul>
+    </div>
+    
+</nav>
+
+<br><br><br><br><br><br>
+      <!-- user profile -->
+     <!-- The Modal -->
+  <div class="modal fade" id="myModal" data-backdrop="false">
+    <div class="modal-dialog modal-sm float-right mr-2 col-lg-3 col-md-3 align-center" style="margin-top:85px;">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><b> hello! </b> {{user.first_name|default:'GUEST'|truncatechars:12}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+          <svg  width="10em" height="10em" viewBox="0 0 16 16" class="bi bi-person  " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          </svg>
+          {{user.email}}
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          {% if user.is_authenticated %}
+          <button type="button" class="btn btn-primary float-left" data-dismiss="modal">
+            <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+              <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+            </svg> Edit
+
+          </button>
+          
+          <a  class="btn btn-danger float-right"  href='{% url "logout" %}'>
+            <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+              <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+            </svg> logout
+
+          </a>
+           {% endif %}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    
+   <!-- end modal -->
+
+
+
+    
+
+{% block content %}  
+
+
+ 
+ 
+ {% endblock %}
+ 
+
+ 
+ 
+ 
+ <footer class="page-footer font-small blue fixed-bottom">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="#">Raman9514@gmail.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

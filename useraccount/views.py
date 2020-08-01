@@ -62,14 +62,3 @@ def logout(request):
     return redirect('index')
 
 
-
-def profile(request):
-    if request.user.is_authenticated:
-        # current_user=request.user
-        # allorders = Order.objects.filter(user_id=current_user)
-        return render(request, 'profile.html')
-        
-        
-
-    else:
-        return render(request, 'guestprofile.html')
