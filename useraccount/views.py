@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
-# from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm,LoginForm
+from django.contrib.auth.forms import SetPasswordForm
+from .forms import SignUpForm,LoginForm,EditUserForm,PasswordChangeForm,PasswordForgotValidate,SetPasswordForm1
 from django.contrib import messages
 from django.contrib.auth import authenticate , login
 from django.contrib.auth.models import auth
 from django.shortcuts import HttpResponse
 from order.models import Order
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -57,8 +59,116 @@ def login(request):
     else:
         return HttpResponse("You are not required ths action")
 
+
 def logout(request):
     auth.logout(request)
     return redirect('index')
 
 
+def edit_user(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            fm=EditUserForm(request.POST,instance=request.user)
+            if fm.is_valid():
+                fm.save()
+                messages.success(request,'Details are Updated')
+            else:
+                messages.error(request,'User Name already exist choose another one')    
+                
+        else:
+            
+            fm=EditUserForm(instance=request.user)
+        return render(request,'edit_user_details.html',{'form':fm})
+    else:
+        return redirect('login')    
+
+  
+
+def password_change(request):
+    if request.user.is_authenticated:
+        if request.method=="POST":
+            fm=PasswordChangeForm(user=request.user,data=request.POST)
+            if fm.is_valid():
+                fm.save()
+        else:
+           fm=PasswordChangeForm(user=request.user)
+        return render(request,'passwordch.html',{'form':fm})
+    
+    
+def passworforgotvalidate(request):
+    result=False
+    if request.method == 'POST':
+        print("HIIIII"*30)
+        fm=PasswordForgotValidate(request.POST)
+        if fm.is_valid():            
+            username=request.POST['user_name']
+            email=request.POST['email']
+            result=User.objects.filter(username=username,email=email).exists()
+            if result==False:
+                messages.error(request,'Uable to Validate your account , please enter correct details')
+            else:
+                if request.user.is_authenticated:
+                    fm=SetPasswordForm1(user=request.user,initial={'user_name':username,'email':email}) 
+                else:
+                    userobj=User.objects.get(username=username,email=email)
+                    fm=SetPasswordForm1(user=userobj,initial={'user_name':username,'email':email})    
+    else:
+        fm=PasswordForgotValidate()
+    return render(request,'forgot_validate.html',{'form':fm,'result':result})
+
+
+# def forgotpassword(request):
+#     if request.method=='POST':
+#         fm=SetPasswordForm1(request.POST)
+#         username=request.POST['user_name']
+#         email=request.POST['email']
+
+#         if fm.is_valid():
+#             print("vorm is Validated")
+            
+#             password=fm.cleaned_data['password1']
+#             u=User.objects.get(username=username,email=email)
+#             u.set_password(password)
+#             u.save()
+#             print('password changed')
+#             messages.success(request, ' Password Changed ')
+#             return redirect('login')
+#         else:
+#             fm=SetPasswordForm1(initial={'user_name':username,'email':email})
+#             print('passwor is not changed')
+#             # return HttpResponse('cant change')
+#             return render(request,'forgot_validate.html',{'form':fm,'result':True})
+
+
+
+
+
+
+
+
+def forgotpassword(request):
+    if request.method=='POST':
+        if request.user.is_authenticated:
+            fm=SetPasswordForm1(request.POST,user=request.user)
+            
+            # user.setpassword(request.POST)
+        else:
+            username=request.POST['user_name']
+            email=request.POST['email']
+            
+            userobj=User.objects.get(username=username,email=email)
+            fm=SetPasswordForm1(data=request.POST,user=userobj)
+        
+        if fm.is_valid():
+            print(fm)
+            fm.save()
+            messages.success(request, ' Password Changed ')
+            return redirect('login')
+        else:
+            # username=request.POST['user_name']
+            # email=request.POST['email']
+            # userobj=User.objects.get(username=username,email=email)
+            # fm=SetPasswordForm1(user=userobj,initial={'user_name':username,'email':email})
+            return render(request,'forgot_validate.html',{'form':fm,'result':True})
+
+            

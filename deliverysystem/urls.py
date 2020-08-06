@@ -24,5 +24,5 @@ urlpatterns = [
     path('useraccount/',include('useraccount.urls')),
     path('order/', include('order.urls')),
     path('staff/',include('delivery_staff.urls')),
-    
+    path('adds/',include('adds.urls')),
 ]

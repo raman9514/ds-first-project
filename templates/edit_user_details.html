@@ -1,0 +1,81 @@
+{% extends "basic.html" %} 
+{block title}Edit{endblock title}
+
+{% block content %}
+
+
+{% if messages %}
+     {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible">
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <strong>{{message}}</strong> 
+      </div> {% endfor %}  {% endif %}
+
+
+<div class="container border border-dark rounded pl-5 pr-5 pb-5 pt-4">
+    <h2 class="ml-5 mb-3">User Details</h2>
+    {% for fm in form %}
+      
+  <b> {{fm.label_tag}} </b> 
+   <input type="{{fm.type}}" value="{{fm.value}}" disabled class="form-control bg-light " >
+ 
+    {% endfor %}
+    <button class="btn btn-primary mt-4 text-white" data-toggle="modal" data-target="#edituser"> EDIT </button>
+    <a class="btn btn-primary mt-4 text-white" href={% url 'password_change' %} > Change Password </a>
+</div>
+
+
+
+
+ <!--start  models -->
+
+ <div id="edituser" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">User Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+            <form action="{% url 'edit_user' %}" method="POST">
+               {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}}<br>
+                {{fm}}
+                {{fm.errors|striptags}}  
+            
+                {% endfor %}
+
+        </div>
+        <div class="modal-footer">
+          <div class="container">
+            <input type="submit" class="btn btn-success " value="save" style="width: 65%; float: left;"> 
+            <button type="button" class="btn btn-danger " data-dismiss="modal" style="width: 30%; float: right">Close</button>
+        </div>
+      </form>
+      </div>          
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+{% endblock content %}{% block css %}
+      
+
+
+{% endblock css %}{% block js %}
+  
+
+{% endblock js %}
+    

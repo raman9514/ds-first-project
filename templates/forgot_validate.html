@@ -1,0 +1,64 @@
+{% extends "basic.html" %} 
+{block title}index{endblock title}
+
+{% block content %}
+  
+<h1> validate </h1>
+
+
+{% if messages %}
+    {% for message in messages %}
+     <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{message}}</strong> 
+     </div> {% endfor %}  {% endif %}
+
+
+{% if result %}
+    
+ <form action="{% url 'forgotpassword' %}" method="POST">
+       {% csrf_token %}
+        {% for fm in form %}
+            
+            {% if fm.is_hidden %}
+
+            {% else %}
+            {{fm.label_tag}}<br>    
+            {% endif %}
+                
+                        
+            {{fm}}
+            <p class="text-danger">{{fm.errors|striptags }}</p>  
+
+        {% endfor %}  
+    <input type="submit" value="submit">
+    </form>
+
+{% else %}
+    <form action="{% url 'passworforgotvalidate' %}" method="POST">
+        {% csrf_token %}
+         {% for fm in form %}
+             {{fm.label_tag}}<br>
+             {{fm}}
+             <p class="text-danger">{{fm.errors|striptags }}</p>  
+
+         {% endfor %}  
+     <input type="submit" value="submit">
+     </form>
+
+
+{% endif %}
+    
+
+{% endblock content %}   
+{% block css %}
+      
+
+{% endblock css %}
+
+
+{% block js %}
+  
+
+{% endblock js %}
+    
