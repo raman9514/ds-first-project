@@ -6,8 +6,8 @@ urlpatterns = [
     path('TakeOrder' , views.TakeOrder,name='TakeOrder'),
     path('myorder' , views.myorder,name='myorder'),
     path('cancleorder/<int:id>',views.cancleorder,name='cancleorder'),
-   path('editorder/<int:id>',views.editorder,name='editorder'),
-   path('order_received/<int:id>',views.order_received,name='order_received'),
+    path('editorder/<int:id>',views.editorder,name='editorder'),
+    path('order_received/<int:id>',views.order_received,name='order_received'),
    
 
 ]

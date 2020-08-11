@@ -1,22 +1,23 @@
 {% extends "basic.html" %} 
+{% load static %}
 {block title}index{endblock title}
 
 {% block content %}
    <!-- ______C A T E G O R Y_______ -->
     <div name='category' class='container rounded d-flex justify-content-around h-25' style=' background-image: linear-gradient(135deg,  #c3cfe2 0%, #c3cfe2 100%); opecity:05px'>
-        <a class="btn btn-primary   mb-3 mt-3  text-light" href="{% url 'category' 'grocery' %}" >Grocery</a>
-        <a class="btn btn-danger    mb-3 mt-3  text-light" href="{% url 'category' 'electronics' %}" >Electronics</a>
-        <a class="btn btn-info      mb-3 mt-3  text-light" href="{% url 'category' 'food' %}" >Food</a>
-        <a class="btn btn-success   mb-3 mt-3  text-light" href="{% url 'category' 'chemist' %}" >Chemist</a>
-        <a class="btn btn-warning   mb-3 mt-3  text-light" href="{% url 'category' 'hardware' %}" >Hardware</a>
-        <a class="btn btn-info      mb-3 mt-3  text-light" href="{% url 'category' 'stationary' %}" >Stationary</a>
-        <a class="btn btn-success   mb-3 mt-3  text-light" href="{% url 'category' 'clothes' %}" >Clothes</a>
+      <a class="btn btn-primary   mb-3 mt-3  text-light" href="{% url 'category' 'grocery' %}" >Grocery</a>
+      <a class="btn btn-danger    mb-3 mt-3  text-light" href="{% url 'category' 'electronics' %}" >Electronics</a>
+      <a class="btn btn-info      mb-3 mt-3  text-light" href="{% url 'category' 'food' %}" >Food</a>
+      <a class="btn btn-success   mb-3 mt-3  text-light" href="{% url 'category' 'chemist' %}" >Chemist</a>
+      <a class="btn btn-warning   mb-3 mt-3  text-light" href="{% url 'category' 'hardware' %}" >Hardware</a>
+      <a class="btn btn-info      mb-3 mt-3  text-light" href="{% url 'category' 'stationary' %}" >Stationary</a>
+      <a class="btn btn-success   mb-3 mt-3  text-light" href="{% url 'category' 'clothes' %}" >Clothes</a>
 
     </div>
   <!-- ______E N D   C A T E G O R Y_______ -->
 
   <!-- C R O U S A L    F O R    A D D S -->
-
+    {% if crousal_adds %}
         <div id="demo" class="carousel slide mt-5" data-ride="carousel">
           <!-- Add Crousal Link -->
            
@@ -65,40 +66,15 @@
           </a>
 
         </div>
-  
+  {% else %}
+       <h2 class="text-center text-warning">Someting is not there :(</h2>
+  {% endif %}
    <!-- E N D     C R O U S A L        -->
   
 
-  <!-- O R D E R   S T A T U S   P R O G R E S S -->
-        {% if user.is_authenticated %}
-        {% if current_order %}
-        <div class="container-fluid   mt-5 mb-5 "  >
-           <h3 class="col-md-12 col-lg-12 col-sm-12"> Order Status : {{current_order.product_list}} </h3>
-             <div class="progress mt-4">
-              {% if current_order.order_pending %}
-                  <div class="progress-bar bg-primary border-dark text-center text-light" style="width:30%">pending</div>
-              {% elif current_order.order_picked%}
-                  <div class="progress-bar bg-warning border-dark text-center text-light" style="width:60%">picked</div>
-              {% elif current_order.order_delivered%}
-                  <div class="progress-bar bg-success border-dark text-center text-light" style="width:100% ; ">Deliverd</div>
-              {% else%}
-                  <a class="btn btn-primary"> Order now </a>
-              {% endif %}
-              </div>
-        </div>
-              {% else %}
-                <div class="container mt-5"> 
-                  <a class="btn btn-block text-light" style="background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);"> Order now </a></div>
-                {% endif %}
-           {% else %}
-                <div class="container mt-5"> 
-                 <a class="btn btn-block text-light" style="background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);"> Login </a></div>
-           {% endif %}         
-
-
-<!-- E N D   O R D E R   S T A T U S   P R O G R E S S -->
-
+  
 <!-- C A R D S    A D D S -->
+{% if card_adds %}
 <div class="card-group">
   
 {% for adds in card_adds %}
@@ -119,10 +95,11 @@
         </div>
         {% endfor %}
       </div>
+
+{% else %}
+  <h2 class="text-center text-warning"> Sorry Nothing Found( </h2>
+{% endif %}
 <!-- E N D   C A R D S    A D D S -->
-
-
-
 
 
 <br><br><br><br>

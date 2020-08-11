@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from .import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -25,4 +27,8 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('staff/',include('delivery_staff.urls')),
     path('adds/',include('adds.urls')),
+
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
