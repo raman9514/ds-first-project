@@ -26,6 +26,7 @@ class Adds(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     payment = models.IntegerField()
+    
 
     
     def __str__(self):

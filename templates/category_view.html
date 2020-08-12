@@ -18,56 +18,77 @@
 
   <!-- C R O U S A L    F O R    A D D S -->
     {% if crousal_adds %}
-        <div id="demo" class="carousel slide mt-5" data-ride="carousel">
-          <!-- Add Crousal Link -->
-           
-          <ul class="carousel-indicators">
-            {% for adds in crousal_adds %}
-            {% if forloop.first %}
-                <li data-target="#demo" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
-            {% else %}
-            <li data-target="#demo" data-slide-to="{{ forloop.counter0 }}" ></li>
-             {% endif %}
-              {% endfor %}
-           </ul>
-           
-           <!-- Crousal Items      -->
 
-           <div class="carousel-inner">
-          {% for adds in crousal_adds %}
-             {% if forloop.first %}
-             <div class="carousel-item active"  style="background-image: url('{{adds.banner.url}}') ; width:100% ; height:400px;" >
-              <div style="margin-top:330px; opacity:0.9 ;" class="container-fluid bg-dark" >
-              <h3 class="text-light" >{{adds.name}}</h3>
-              <p class="text-light">{{adds.description}}</p>
-              <p>{{adds.contact}}</p>
-               </div>
+    <div id="demo" class="carousel slide mt-3" data-ride="carousel">
+      <!-- Add Crousal Link -->
+       
+      <ul class="carousel-indicators">
+        {% for adds in crousal_adds %}
+        {% if forloop.first %}
+            <li data-target="#demo" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+        {% else %}
+        <li data-target="#demo" data-slide-to="{{ forloop.counter0 }}" ></li>
+         {% endif %}
+          {% endfor %}
+       </ul>
+       
+       <!-- Crousal Items      -->
+
+       <div class="carousel-inner">
+      {% for adds in crousal_adds %}
+         {% if forloop.first %}
+         <div class="carousel-item active"   >
+          <a href="{% url 'visitus' adds.id %}">
+          <div style="background-image: url('{{adds.banner.url}}') ; width:100% ; height:400px;">
+              <div style="height: 81%;" class="container mt-5"> </div> 
+            
+               <div style="height: 18%; opacity:0.9 ; " class="container-fluid bg-dark " >
+                  <div class="float-left" style="width:50%">
+                     <h3 class="text-light " >{{adds.name}}</h3>
+                     <p class="text-light ">{{adds.description}}</p></div>
+                  <div style="width:50%" class="float-right">
+                      <a href="{% url 'visitus' adds.id %}" class="btn btn-primary float-right mt-3 ml-4">visit</a>
+                  </div>
+                </div>      
             </div>
-              
-              {% else %}
-               <div class="carousel-item"  style="background-image: url('{{adds.banner.url}}') ; width:100% ; height:400px;" >
-              
-                <div style=" opacity:0.9 ; margin-top:330px;" class="container-fluid bg-dark" >
-                  <h3 class="text-light" >{{adds.name}}</h3>
-                   <p class="text-light">{{adds.description}} </p> 
-                   </div>
-                 </div>
-                  {% endif %}
-            {% endfor %}
-          </div>
-
-          
-        <!-- crousal slider -->
-          <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
           </a>
-          <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </a>
+         </div>
+          {% else %}
+           <div class="carousel-item">
+            <a href="{% url 'visitus' adds.id %}">
+            <div style="background-image: url('{{adds.banner.url}}') ; width:100% ; height:400px;">
+              <div style="height: 81%;" class="container mt-5"> </div> 
+            
+               <div style="height: 18%; opacity:0.9 ; " class="container-fluid bg-dark " >
+                  <div class="float-left" style="width:50%">
+                     <h3 class="text-light " >{{adds.name}}</h3>
+                     <p class="text-light ">{{adds.description}}</p></div>
+                  <div style="width:50%" class="float-right">
+                      <a href="{% url 'visitus' adds.id %}" class="btn btn-primary float-right mt-3 ml-4">visit</a>
+                  </div>
+                </div>      
+              </div>
+            </a>
+             </div>
+              {% endif %}
+        {% endfor %}
+      </div>
 
-        </div>
+      
+    <!-- crousal slider -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+
+    </div>
+
   {% else %}
-       <h2 class="text-center text-warning">Someting is not there :(</h2>
+
+      <!-- what if no data returned by the server -->
+
   {% endif %}
    <!-- E N D     C R O U S A L        -->
   
@@ -78,26 +99,30 @@
 <div class="card-group">
   
 {% for adds in card_adds %}
-      <div class="container  mt-5 clo-lg-3 col-md-4 col-sm-12 ">  
-        <div class="card text-center " style=" height:300px  ;background: linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%)">
-            <div class="card-header">
-              <b class="text-dark">{{ adds.name}}</b> 
-            </div>
-            <div class="card-body bg-light mt-0" style="background-image:url('{{adds.banner.url}}')">
-              
-              
-            </div>
-            <div class="card-footer text-muted ">
-                <h5 class="float-left text-primary mt-2">{{adds.contact}}</h5>
-                <a href="#" class="btn btn-primary float-right">visit us</a>
-            </div>
-          </div>
-        </div>
+<div class="container  mt-5 clo-lg-3 col-md-4 col-sm-12 ">  
+  <div class="card text-center " style=" height:300px  ;background: linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%)">
+      <div class="card-header">
+        <b class="text-dark">{{ adds.name}}</b> 
+      </div>
+      <div class="card-body bg-light p-0" >
+        
+            <img src="{{adds.banner.url}}" width="100%" height="100%">
+        
+        
+      </div>
+      <div class="card-footer text-muted ">
+          <h5 class="float-left text-primary mt-2">{{adds.contact}}</h5>
+          <a href="{% url 'visitus' adds.id %}" class="btn btn-primary float-right">visit us</a>
+      </div>
+    </div>
+  </div>
         {% endfor %}
       </div>
 
 {% else %}
-  <h2 class="text-center text-warning"> Sorry Nothing Found( </h2>
+
+        <!-- what is no data returned by server -->
+
 {% endif %}
 <!-- E N D   C A R D S    A D D S -->
 
