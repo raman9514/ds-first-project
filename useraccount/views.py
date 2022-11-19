@@ -117,32 +117,6 @@ def passworforgotvalidate(request):
     return render(request,'forgot_validate.html',{'form':fm,'result':result})
 
 
-# def forgotpassword(request):
-#     if request.method=='POST':
-#         fm=SetPasswordForm1(request.POST)
-#         username=request.POST['user_name']
-#         email=request.POST['email']
-
-#         if fm.is_valid():
-#             print("vorm is Validated")
-            
-#             password=fm.cleaned_data['password1']
-#             u=User.objects.get(username=username,email=email)
-#             u.set_password(password)
-#             u.save()
-#             print('password changed')
-#             messages.success(request, ' Password Changed ')
-#             return redirect('login')
-#         else:
-#             fm=SetPasswordForm1(initial={'user_name':username,'email':email})
-#             print('passwor is not changed')
-#             # return HttpResponse('cant change')
-#             return render(request,'forgot_validate.html',{'form':fm,'result':True})
-
-
-
-
-
 
 
 
@@ -165,10 +139,7 @@ def forgotpassword(request):
             messages.success(request, ' Password Changed ')
             return redirect('login')
         else:
-            # username=request.POST['user_name']
-            # email=request.POST['email']
-            # userobj=User.objects.get(username=username,email=email)
-            # fm=SetPasswordForm1(user=userobj,initial={'user_name':username,'email':email})
+
             return render(request,'forgot_validate.html',{'form':fm,'result':True})
 
             

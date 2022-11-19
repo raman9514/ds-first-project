@@ -27,8 +27,8 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('staff/',include('delivery_staff.urls')),
     path('adds/',include('adds.urls')),
-
+    path('about',views.about,name='abou'),
 ]
 
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATICFILES_DIRS)

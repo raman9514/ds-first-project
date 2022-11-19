@@ -56,22 +56,7 @@ class SetPasswordForm1(SetPasswordForm):
     new_password1= forms.CharField(label='New Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
     new_password2= forms.CharField(label='Confirm New Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
     
-    # def clean_password1(self):
-    #     value = self.cleaned_data['password1']
-
-    #     if len(value)>=8:
-    #         pass
-    #     else:
-    #         raise forms.ValidationError('password must contin number , special character , upercase character')
-        
-
-    # def clean_password2(self):
-    #     value = self.cleaned_data['password2']
-    #     value1 = self.cleaned_data['password1']
-    #     if value != value1:
-    #         raise forms.ValidationError('password must be same')
-    #     return value
-        
+    
         
 
             

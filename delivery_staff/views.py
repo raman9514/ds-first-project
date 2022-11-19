@@ -32,7 +32,7 @@ def accept_order(request,order_id):
 def accepted_order(request):
         if request.user.is_authenticated and request.user.is_staff==True:
             user = request.user.id
-            obj = Order.objects.filter( delivery_staff = user )
+            obj = Order.objects.filter( delivery_staff = user ).order_by('-id')
             return render(request,'accepted_order.html',{'obj':obj})
 
         else:

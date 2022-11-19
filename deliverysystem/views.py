@@ -14,5 +14,6 @@ def index(request):
     return render(request,'index.html',{'crousal_adds':crousal_adds,'card_adds':card_adds,'current_order':current_order})
 
 
-
+def about(request):
+    return render(request,'about.html')
 
